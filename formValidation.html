@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Validate form</title>
+</head>
+
+<style>
+	input{
+		outline: 0;
+		border: 1px black solid;
+		height: 25px;
+		width: 220px;
+		padding: 3px;
+		margin-bottom: 5px;
+
+
+	}
+
+	div{
+		margin-top: 13px;
+
+	}
+	.error {
+	  border-color: #ff4747;
+	}
+	.valid {
+	  border-color: #37a137;
+	}
+	.hide {
+	  display: none;
+	}
+</style>
+<body>
+	
+
+	<main> 
+		<h2>Create Account</h2>
+		<div>
+		<label for="first-name">Firstname</label><br>
+		<input type="text" name="first-name" id="first-name" class="user-first-name" placeholder="Enter first name" autocomplete="off"><br>
+		<span class="firstname-input-error hide">Invalid input</span>
+		<span class="firstname-error-message hide">Fill out this field</span>
+	</div>
+	<div>
+		<label for="last-name">Lastname</label><br>
+		<input type="text" id="last-name" name="last-name" class="user-last-name" placeholder="Enter last name" autocomplete="off"><br>
+		<span class="lastname-input-error hide">Invalid Input!</span>
+		<span class="lastname-error-message hide">Fill out this field</span>
+	</div>
+	<div>
+		<label class="email">Email</label><br>
+		<input type="email" id="email" name="email" class="user-email" placeholder="Enter email" autocomplete="off"><br>
+		<span class="email-input-error hide">Invalid Email Address!</span>
+		<span class="email-error-message hide">Fill out this field</span>
+	</div>
+	<div>
+		<label for="phone">Phone</label><br>
+		<input type="text" id="phone" name="phone" class="user-phone" placeholder="Enter phone number" autocomplete="off"><br>
+		<span class="phone-input-error hide">Invalid phone number. Must be 10 Digits long</span>
+		<span class="phone-error-message hide">Fill out this field</span>
+	</div>
+	<div>
+		<label for="password">Password</label><br>
+		<input type="password" id="password" name="password" class="user-password" placeholder="Enter password" autocomplete="off"><button class="show-password">Show Password</button><br>
+		<span class="password-input-error hide">Password must be 8 characters long. Include numbers and letters!</span>
+		<span class="password-error-message hide">Fill out this field</span>
+	</div>
+	<div>
+		<label for="confirm-password">Confirm Password</label><br>
+		<input type="password" id="confirm-password" name="confirm-password" class="user-confirm-password" placeholder="Confirm password" autocomplete="off"><button class="show-password">Show Password</button><br>
+		<span class="confirm-input-error hide">Password do not match!</span>
+		<span class="confirm-error-message hide">Fill out this field</span>
+	</div>
+	<button class="register-button">Register</button>
+	</main>
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+	/* ----------------- DOM Variables ----------------------- */
+
+	// firstname
+	let firstnameElement = document.querySelector('.user-first-name');
+	let fnameErrorMessage = document.querySelector('.firstname-input-error');
+	let firstnameError = document.querySelector('.firstname-error-message');
+
+	// Lastname
+	let lastnameElement = document.querySelector('.user-last-name');
+	let lnameErrorMessage = document.querySelector('.lastname-input-error');
+	let lastnameError = document.querySelector('.lastname-error-message');
+
+	// email
+	let emailElement = document.querySelector('.user-email');
+	let emailErrorMessage = document.querySelector('.email-input-error');
+	let emailError = document.querySelector('.email-error-message');
+
+	// phone number
+	let phoneElement = document.querySelector('.user-phone');
+	let phoneErrorMessage = document.querySelector('.phone-input-error');
+	let phoneError = document.querySelector('.phone-error-message');
+
+	// Password
+	let passwordElement = document.querySelector('.user-password');
+	let passErrorMessage = document.querySelector('.password-input-error');
+	let passwordError = document.querySelector('.password-error-message');
+
+	// Confirm password
+	let confirmpasswordElement = document.querySelector('.user-confirm-password');
+	let confErrorMessage = document.querySelector('.confirm-input-error');
+	let confirmpasswordError = document.querySelector('.confirm-error-message');
+
+	// show password buttons
+	let showHidePassword = document.querySelectorAll('.show-password');
+
+	// register button
+	let buttonElement = document.querySelector('.register-button');
+
+	//Valid
+	let validClasses = document.getElementsByClassName("valid");
+	let invalidClasses = document.getElementsByClassName("error");
+
+	/* ---------- Regular expressions for input validation ---------------- */
+
+	// 1. Text content
+	function textVerify(text){
+		const regEx = /^[a-zA-Z]{3,}$/;  // Name should begin and end with a letter and should be more than three letters
+
+		return regEx.test(text); //return true
+	}
+
+	// 2. Phone Number
+	function phoneVerify(phone){
+		const regEx = /^[0-9]{10}$/; // phone number should not be more than 10 numbers
+
+		return regEx.test(phone); // return true
+	}
+
+	// 3. Password 
+	function passwordVerify(password){
+		const regEx = /^[a-zA-Z0-9_]{8}$/;
+
+		return regEx.test(password);
+	}
+
+	// 4. email address
+
+	function emailVerify(emailInput){
+		const regEx = /^[a-z0-9_]+@[a-z]{3,}\.[a-z\.]{3,}$/
+
+		return regEx.test(emailInput);
+	}
+
+	// validating empty inputs
+
+
+	/*---When input elements are empty, this function will be called---*/
+	function emptyInput(inputElement, emptyError, invalidError){
+		if(!inputElement.value){
+			emptyError.classList.remove("hide");
+			inputElement.classList.add("error");
+			invalidError.classList.add("hide");
+		}else{
+			emptyError.classList.add("hide")
+		}
+	}
+
+
+	/*---Update errors for invalid input---*/
+
+	function updateError(inputElement, errorReference){
+		errorReference.classList.remove("hide");
+		inputElement.classList.remove("valid");
+		inputElement.classList.add("error");
+
+	}
+
+	/*---Update errors for a valid input---*/
+	function updateValidInput(inputElement){
+		inputElement.classList.remove("error");
+		inputElement.classList.add("valid");
+	}
+
+	/*---first name validation---*/
+	firstnameElement.addEventListener('input', () =>{
+		if(textVerify(firstnameElement.value)){
+			fnameErrorMessage.classList.add("hide");
+			updateValidInput(firstnameElement);
+		}else{
+			updateError(firstnameElement, fnameErrorMessage);
+			emptyInput(firstnameElement,  firstnameError, fnameErrorMessage);
+		}
+	});
+
+	// Last name
+	lastnameElement.addEventListener('input', () => {
+		if(textVerify(lastnameElement.value)){
+			lnameErrorMessage.classList.add("hide");
+			updateValidInput(lastnameElement);
+		} else{
+			updateError(lastnameElement, lnameErrorMessage);
+			emptyInput(lastnameElement, lastnameError, lnameErrorMessage);
+		}
+	});
+
+	// Email address
+	emailElement.addEventListener('input', () => {
+		if(emailVerify(emailElement.value)){
+			emailErrorMessage.classList.add("hide");
+			updateValidInput(emailElement);
+		} else{
+			updateError(emailElement, emailErrorMessage);
+			emptyInput(emailElement, emailError, emailErrorMessage);
+		}
+	});
+
+	// phone number
+	phoneElement.addEventListener('input', () => {
+		if(phoneVerify(phoneElement.value)){
+			phoneErrorMessage.classList.add("hide");
+			updateValidInput(phoneElement);
+		} else{
+			updateError(phoneElement, phoneErrorMessage);
+			emptyInput(phoneElement, phoneError, phoneErrorMessage);
+		}
+	});
+
+	// password
+	passwordElement.addEventListener('input', () => {
+		if(passwordVerify(passwordElement.value)){
+			passErrorMessage.classList.add("hide");
+			updateValidInput(passwordElement);
+		} else{
+			updateError(passwordElement, passErrorMessage);
+			emptyInput(passwordElement, passwordError, passErrorMessage);
+		}
+	});
+
+	// confirm password
+	confirmpasswordElement.addEventListener('input', () => {
+		if(confirmpasswordElement.value === passwordElement.value){
+			confErrorMessage.classList.add("hide");
+			updateValidInput(confirmpasswordElement);
+		} else{
+			updateError(confirmpasswordElement, confErrorMessage);
+			emptyInput(confirmpasswordElement, confirmpasswordError, confErrorMessage);
+		}
+	});
+
+	// show-hide password
+	showHidePassword.forEach((show)=>{
+		show.addEventListener('click', () => {
+			let getParent = show.parentElement.querySelector('input');
+
+			if(getParent.type === 'password'){
+				getParent.type = 'text';
+			} else{
+				getParent.type = 'password';
+			}
+		})
+
+	});
+
+	//Submit button
+	buttonElement.addEventListener("click", () => {
+		  if (validClasses.length == 6 && invalidClasses.length == 0) {
+		    addUser();
+
+		  } else {
+		    alert("Error");
+		  }
+
+	});
+	
+	function addUser(){
+		alert(`You have registered as ${firstnameElement.value} ${lastnameElement.value}. Thank you!`);
+
+	    	let users = JSON.parse( localStorage.getItem('users'));
+
+	    	if(!users){
+	    		users = [];
+	    	}
+
+
+		    users.unshift(
+			      {
+			        first_name: firstnameElement.value,
+			        last_name: lastnameElement.value,
+			        email: emailElement.value,
+			        phone: phoneElement.value,
+			        password: passwordElement.value
+			      }
+		      );
+
+		    localStorage.setItem('users', JSON.stringify(users));	//save the user data to localstorage
+
+		    resetInput();
+	}
+
+	function resetInput(){
+		firstnameElement.value = '';
+	    lastnameElement.value = '';
+	    emailElement.value = '';
+	    phoneElement.value = '';
+	    passwordElement.value = '';
+	    confirmpasswordElement.value = '';
+	}
+	
+</script>
+</body>
+</html>
