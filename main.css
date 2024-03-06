@@ -1,0 +1,243 @@
+/* ----Google fonts---- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0; padding: 0;
+    transition: ease all .2s;
+    font-family: "Poppins", sans-serif;
+}
+
+:root{
+    --primary-color: #0CAFFF;
+    --accent-color: #f4f4f4;
+    --secondary-color: #1F75FE;
+
+
+    --padding: 1rem 1.5rem;
+}
+body{
+    background-color: var(--accent-color);
+}
+.main-container{
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    width: 1000px;
+    height: aut0;
+    margin: 100px auto;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    
+}
+
+.left-section{
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+
+}
+.main-container .left-section h1{
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    margin-bottom: 200px;
+    font-weight: 400;
+
+}
+.main-container .left-section h2{
+    color: var(--accent-color);
+    font-size: 2rem;
+    font-weight: 800;
+    
+}
+.main-container .left-section h2 span{
+    color: #ffa500;
+}
+section{
+    padding: var(--padding);
+}
+
+.error-message{
+    font-size: .6rem;
+    font-weight: 400;
+    color: #ff4747;
+    padding-left: 1rem;
+
+}
+.error {
+  border-color: #ff4747;
+  
+}
+.valid {
+  border-color: #37a137;
+}
+.hide {
+  display: none;
+}
+
+
+/* right section starts */
+
+.right-section{
+    padding: 2.2rem 2rem;
+}
+.right-section .contact{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 40%;
+    margin-bottom: 10%;
+}
+
+.right-section .contact a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.right-section .contact a:hover{
+    color: #1F75FE;
+}
+
+.title{
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 5%;
+    color: var(--primary-color);
+}
+.right-section .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.right-section .container div{
+    display: flex;
+    align-items: flex-start;
+    justify-self: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.right-section .container div label{
+    color: #1b1b1b;
+    font-size: .8rem;
+    font-weight: 400;
+    padding-left: 1rem;
+    margin-bottom: 5px;
+    ;
+}
+
+.right-section .container .names{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+input,
+.right-section .container div .container{
+    outline: 0;
+    border: 1px #cccccc solid;
+    height: 37px;
+    width: 100%;
+    padding-left: 15px;
+    border-radius: 40px;
+    font-size: .8rem;
+    background: none;
+}
+
+.right-section .container div .container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    
+}
+.right-section .container div .container input{
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.right-section .container div .container button{
+    background: none;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    height: 25px;
+    width: 25px;
+    margin-left: -40px;
+    color: #1b1b1b;
+    cursor: pointer;
+}
+.right-section .container div .container button:hover{
+    background-color: #e6e6e6;
+
+}
+
+.right-section .container div .container button:active{
+    background-color: #eeeeee;
+}
+
+.btn{
+    width: 50%;
+    border-radius: 40px;
+    background-color: var(--primary-color);
+    height: 35px;
+    border: none;
+    color: var(--accent-color);
+    margin: 0 auto;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: var(--secondary-color);
+}
+
+.btn:active{
+    background-color: var(--primary-color);
+}
+
+
+/* Mediaqueries */
+
+
+@media(max-width: 990px){
+    .main-container{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        
+    }
+    .right-section .contact {
+        width: 100%;
+        margin-left: 0%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+    }
+    .right-section .contact a{
+        font-size: .8rem;
+        text-align: center;
+        margin-right: 20px;
+    }
+    .main-container .left-section h1 {
+       
+        margin-bottom: 10px;
+    }
+
+    .main-container{
+        margin: 0;
+    }
+    .right-section {
+        padding: 1rem;
+    }
+}
